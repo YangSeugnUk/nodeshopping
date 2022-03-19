@@ -37,8 +37,13 @@ app.get("/", (req, res) => {
 })
 
 // route
-//app.use("/api/product", productRoute)
+app.use("/api/product", productRoute)
 app.use("/api/order", orderRoute)
+
+
+
+
+
 const PORT = process.env.PORT || 7000
 
 app.listen(PORT, () => console.log("server started"))

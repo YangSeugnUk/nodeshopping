@@ -1,29 +1,49 @@
 import express from "express"
-import productModel from "../models/productModel.js";
+import Product from "../models/productModel.js";
+import asyncHandler from "express-async-handler";
 
 const router = express.Router()
 
 // crud
 
-router.get("/", (req, res) =>{
+router.get("/", asyncHandler (async (req, res) =>{
+   const products = await Product.find()
     res.json({
-        message : "product get"
+        count: products.length,
+        products: products
     })
-})
+}))
 
-router.post("/", (req, res) =>{
+router.post("/", asyncHandler (async (req, res) =>{
 
-    const userInput = {
+    // const userInput = {
+    //     name : req.body.name,
+    //     price : req.body.price,
+    //     desc : req.body.description
+    // }
+    //
+    // res.json({
+    //     msg : "product create",
+    //     newProduct : userInput
+    // })
+
+    const product = new Product({
         name : req.body.name,
         price : req.body.price,
-        desc : req.body.description
-    }
+        brand : req.body.brand,
+        category : req.body.category,
+        description : req.body.description,
+    })
+
+    const newProduct =  await product.save()
 
     res.json({
-        msg : "product create",
-        newProduct : userInput
+        message : "created a product",
+        product : newProduct
     })
-})
+
+
+}))
 
 router.put("/",(req, res) =>{
     res.json({
