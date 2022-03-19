@@ -1,0 +1,23 @@
+{
+  "name": "nodeshopping",
+  "version": "1.0.0",
+  "description": "nodeshopping",
+  "main": "index.js",
+  "type" : "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YangSeugnUk/nodeshopping.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YangSeugnUk/nodeshopping/issues"
+  },
+  "homepage": "https://github.com/YangSeugnUk/nodeshopping#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
