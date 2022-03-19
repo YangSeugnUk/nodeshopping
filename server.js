@@ -1,10 +1,15 @@
+import dotenv from "dotenv"
 import express from "express"
 import morgan from "morgan"
 import cors from "cors"
 import bodyParser from "body-parser";
+import connectDB from "./config/database.js"
+
 
 import productRoute from "./routes/product.js"
 import orderRoute from "./routes/order.js"
+
+dotenv.config()
 
 // 순서
 // 1. morgan
@@ -14,6 +19,9 @@ import orderRoute from "./routes/order.js"
 
 
 const app = express()
+// connectDB
+connectDB()
+
 
 // 미들웨어
 app.use(morgan('dev'))
@@ -31,6 +39,6 @@ app.get("/", (req, res) => {
 // route
 //app.use("/api/product", productRoute)
 app.use("/api/order", orderRoute)
-const PORT = 9000
+const PORT = process.env.PORT || 7000
 
 app.listen(PORT, () => console.log("server started"))
