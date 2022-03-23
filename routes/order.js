@@ -45,17 +45,51 @@ router.post("/",asyncHandler( async (req,res) =>{
 
 }))
 
-router.put("/", asyncHandler(async (req,res) =>{
+router.put("/:orderId",asyncHandler(async (req,res)=>{
+    const id = req.params.orderId
+    const {orderItems,shippingAddress,
+           paymentMethod,itemsPrice,taxPrice,
+        shippingPrice,totalPrice,user} = req.body
+
+    const order = await Order.findById(id)
+
+    if(order){
+        Order.orderItems = orderItems || Order.orderItems
+        Order.shippingAddress = shippingAddress || Order.shippingAddress
+        Order.paymentMethod = paymentMethod || Order.paymentMethod
+        Order.itemsPrice = itemsPrice || Order.itemsPrice
+        Order.taxPrice = taxPrice || Order.taxPrice
+        Order.shippingPrice = shippingPrice || Order.shippingPrice
+        Order.totalPrice = totalPrice || Order.totalPrice
+        Order.user = user || Order.user
+
+        const updateOrder = await order.save()
+
+        res.json({
+            msg: "update order",
+            order : updateOrder
+        })
+    }
+
+
+}))
+
+router.delete("/",asyncHandler(async (req, res) =>{
+    await Order.remove()
+
     res.json({
-        msg : "order update"
+        msg : "delete all order"
     })
 }))
 
-router.delete("/",(req, res) =>{
+router.delete("/:orderId", asyncHandler(async (req,res)=>{
+    const {orderId} = req.params
+    await Order.findByIdAndRemove(orderId)
+
     res.json({
-        msg : "order delete"
+        msg: "delete at" + orderId
     })
-})
+}))
 
 export default router
 
