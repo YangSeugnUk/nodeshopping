@@ -74,11 +74,11 @@ router.post("/", asyncHandler (async (req, res) =>{
 
 router.put("/:productId",asyncHandler(async (req, res) =>{
 
-    const id = req.params.productId
+    const {productId} = req.params
 
     const {name, price, brand, category, description} = req.body
 
-    const product = await Product.findById(id)
+    const product = await Product.findById(productId)
 
     if (product) {
         product.name = name || product.name
