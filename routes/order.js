@@ -9,14 +9,6 @@ router.get("/",(req,res) =>{
 })
 
 router.post("/",(req,res) =>{
-    const userInput = {
-        product : req.body.product,
-        qty : req.body.qty,
-        price : req.body.price
-    }
-    res.json({
-        msg : "order create"
-    })
 })
 
 router.put("/", (req,res) =>{
