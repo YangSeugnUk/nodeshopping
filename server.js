@@ -12,11 +12,17 @@ import orderRoute from "./routes/order.js"
 dotenv.config()
 
 // 순서
-// 1. morgan
-// 2. nodemon
-// 3. cors
+// 1. morgan -> 로깅에 도움을 주는 미들웨어. npm install morgan
+// 2. nodemon -> 서버를 실행하면 코드가 바뀔떄마다 자동으로 재시작을 해준다.
+//               package.json에 아래 script -> dev도 추가해야됨
+//               "scripts": {
+//                            "test": "echo \"Error: no test specified\" && exit 1",
+//                            "dev": "nodemon server.js"
+//                           },
+// 3. cors  -> npm install --save cors
 // 4. bodyparser
-
+// 5. dotenv  -> 환경 변수를 파일에 저장할 수 있도록 해주는 dotenv 라이브러리 ( 키=값의 포멧 )
+// 6. CRUD · Create = POST · Read = GET · Update = PUT, PATCH · Delete = DETELE.
 
 const app = express()
 // connectDB
