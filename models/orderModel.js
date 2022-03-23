@@ -5,31 +5,32 @@ const orderSchema = mongoose.Schema(
     {
         user : {
             type: mongoose.Schema.Types.ObjectId,
-            required: true,
+            // required: true,
             ref : "User"
         },
-        orderItems : {
-            name: {
-                type:String,
-                required: true,
-            },
-            qty: {
-                type:Number,
-                required: true,
-            },
-            price:{
-                type:Number,
-                required: true,
-            },
-            product:{
-                type:mongoose.Schema.Types.ObjectId,
-                required: true,
-                ref: "Product"
+        orderItems : [
+            {
+                name: {
+                    type: String,
+                    required: true,
+                },
+                qty: {
+                    type: Number,
+                    required: true,
+                },
+                price: {
+                    type: Number,
+                    required: true,
+                },
+                product: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    required: true,
+                    ref: "Product"
+                }
             }
-
-        },
-        shippingAdress : {
-            adress:{
+        ],
+        shippingAddress : {
+            address:{
                 type:String,
                 required:true,
             },
