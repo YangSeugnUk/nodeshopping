@@ -64,9 +64,6 @@ router.post("/login", asyncHandler( async (req, res) => {
             res.json(user)
         }
     }
-
-
-
 }))
 
 

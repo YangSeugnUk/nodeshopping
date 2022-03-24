@@ -10,6 +10,7 @@ import productRoute from "./routes/product.js"
 import orderRoute from "./routes/order.js"
 import itemRoute from "./routes/item.js"
 import userRoute from "./routes/user.js"
+import order2Route from "./routes/order2.js";
 
 dotenv.config()
 
@@ -49,6 +50,7 @@ app.use("/api/product", productRoute)
 app.use("/api/order", orderRoute)
 app.use("/api/item", itemRoute)
 app.use("/api/user", userRoute)
+app.use("/api/order2", order2Route)
 
 
 

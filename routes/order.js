@@ -3,7 +3,10 @@ import Order from "../models/orderModel.js";
 import asyncHandler from "express-async-handler";
 
 const router = express.Router()
+// CRUD : get(select), put(update), post(create), delete(delete)
 
+
+// get(select)
 router.get("/",asyncHandler(async (req,res) =>{
     const orders = await Order.find()
     res.json({
@@ -12,6 +15,7 @@ router.get("/",asyncHandler(async (req,res) =>{
     })
 }))
 
+// post(create)
 router.post("/",asyncHandler( async (req,res) =>{
     const {
         orderItems,
@@ -45,6 +49,8 @@ router.post("/",asyncHandler( async (req,res) =>{
 
 }))
 
+
+// put(update)
 router.put("/:orderId",asyncHandler(async (req,res)=>{
     const id = req.params.orderId
     const {orderItems,shippingAddress,
@@ -74,7 +80,9 @@ router.put("/:orderId",asyncHandler(async (req,res)=>{
 
 }))
 
-router.delete("/",asyncHandler(async (req, res) =>{
+
+//delete(delete)
+router.delete("/",asyncHandler(async (req, res) => {
     await Order.remove()
 
     res.json({
@@ -82,7 +90,7 @@ router.delete("/",asyncHandler(async (req, res) =>{
     })
 }))
 
-router.delete("/:orderId", asyncHandler(async (req,res)=>{
+router.delete("/:orderId", asyncHandler(async (req,res) => {
     const {orderId} = req.params
     await Order.findByIdAndRemove(orderId)
 
