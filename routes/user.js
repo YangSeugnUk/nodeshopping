@@ -96,8 +96,13 @@ router.post("/login", asyncHandler( async (req, res) => {
 router.get("/", protect, asyncHandler (async (req, res) => {
 
     const user = await User.findById(req.user.id)
+    if (user){
+        res.json(user)
+    }else{
+        res.status(404)
+        throw new Error('user not found')
+    }
 
-    res.json(user)
 
 }))
 
