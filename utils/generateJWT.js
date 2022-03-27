@@ -1,4 +1,4 @@
-// npm i jsonwebtoken
+    // npm i jsonwebtoken
 import jwt from "jsonwebtoken"
 
 const generateToken = (id) => {

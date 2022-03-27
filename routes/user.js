@@ -2,6 +2,7 @@ import express from "express"
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateJWT.js";
+import {protect} from "../middleware/authMiddleware.js";
 
 const router = express.Router()
 
@@ -92,10 +93,12 @@ router.post("/login", asyncHandler( async (req, res) => {
 
 
 // 프로필 불러오기
-router.get("/", (req, res) => {
-    res.json({
-        message:"user get"
-    })
-})
+router.get("/", protect, asyncHandler (async (req, res) => {
+
+    const user = await User.findById(req.user.id)
+
+    res.json(user)
+
+}))
 
 export default router
