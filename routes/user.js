@@ -1,8 +1,6 @@
 import express from "express"
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
-import bcrypt from "bcryptjs"
-import gravatar from "gravatar"
 
 const router = express.Router()
 
@@ -26,22 +24,22 @@ router.post("/signup", asyncHandler(async (req, res) => {
 
     }else{
         //프로필 이미지 생성
-        const avatar = gravatar.url(
-            email,
-            {
-                s : "200",
-                r : "pg",
-                d : "mm",
-                protocol : "https"
-            }
-        )
+        // const avatar = gravatar.url(
+        //     email,
+        //     {
+        //         s : "200",
+        //         r : "pg",
+        //         d : "mm",
+        //         protocol : "https"
+        //     }
+        // )
 
-        // 패스워드 암호화
-        const passwordHashed = await bcrypt.hashSync(password, 10)
+        // // 패스워드 암호화
+        // const passwordHashed = await bcrypt.hashSync(password, 10)
 
 
         const user = new User({
-            name, email, password: passwordHashed, profileImage: avatar
+            name, email, password
         })
 
         const newUser = await user.save();
@@ -71,7 +69,7 @@ router.post("/login", asyncHandler( async (req, res) => {
         throw new Error('email is not registered')
 
     }else{
-       const isMatched = await bcrypt.compare(password, user.password)
+        const isMatched = await user.isValidPassword(password)
         if(!isMatched){
             // return res.status(408).json({
             //     msg : "password is not matched"
@@ -81,6 +79,9 @@ router.post("/login", asyncHandler( async (req, res) => {
         }else{
             res.json(user)
         }
+
+       // const isMatched = await bcrypt.compare(password, user.password)
+
     }
 }))
 
