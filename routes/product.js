@@ -28,13 +28,18 @@ router.get("/:productId", asyncHandler(async (req,res) => {
 
     const product = await Product.findById(productId)
 
-    res.json({
-        id:product._id,
-        name:product.name,
-        price:product.price,
-        brand:product.brand,
-        category:product.category,
-    })
+    if (product){
+        res.json({
+            id:product._id,
+            name:product.name,
+            price:product.price,
+            brand:product.brand,
+            category:product.category,
+        })
+    }else{
+        res.status(404)
+        throw new Error('Product not found')
+    }
 
 }))
 
@@ -94,6 +99,9 @@ router.put("/:productId",asyncHandler(async (req, res) =>{
             product : updatedProduct
         })
 
+    }else{
+        res.status(404)
+        throw new Error('Product not Found')
     }
 
 
@@ -106,7 +114,7 @@ router.delete( "/",asyncHandler(async (req,res) => {
    await Product.remove()
 
     res.json({
-        msg : "deleted all product  "
+        msg : "deleted all product"
     })
 }))
 

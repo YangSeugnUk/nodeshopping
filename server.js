@@ -11,6 +11,8 @@ import orderRoute from "./routes/order.js"
 import itemRoute from "./routes/item.js"
 import userRoute from "./routes/user.js"
 import order2Route from "./routes/order2.js";
+import user2Route from "./routes/user2.js";
+import {notFound, errorHandler} from "./middleware/errorMiddleware.js";
 
 dotenv.config()
 
@@ -51,7 +53,10 @@ app.use("/api/order", orderRoute)
 app.use("/api/item", itemRoute)
 app.use("/api/user", userRoute)
 app.use("/api/order2", order2Route)
+app.use("/api/user2", user2Route)
 
+app.use(notFound)
+app.use(errorHandler)
 
 
 const PORT = process.env.PORT || 7000
