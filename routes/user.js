@@ -1,6 +1,7 @@
 import express from "express"
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
+import generateToken from "../utils/generateJWT.js";
 
 const router = express.Router()
 
@@ -77,8 +78,12 @@ router.post("/login", asyncHandler( async (req, res) => {
             res.status(409)
             throw new Error('password is not matched')
         }else{
-            res.json(user)
+            res.json({
+                token : generateToken(user._id)
+            })
         }
+
+
 
        // const isMatched = await bcrypt.compare(password, user.password)
 
