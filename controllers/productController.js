@@ -6,13 +6,14 @@ const getProducts = asyncHandler (async (req, res) => {
     const products = await Product.find()
     res.json({
         count: products.length,
-        products: products.map(product => {
-            return {
-                id: product._id,
-                name: product.name,
-                price: product.price,
-            }
-        })
+        // products: products.map(product => {
+        //     return {
+        //         id: product._id,
+        //         name: product.name,
+        //         price: product.price,
+        //     }
+        // })
+        products
     })
 })
 
