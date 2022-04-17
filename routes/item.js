@@ -5,6 +5,7 @@ import {itemGet,
     itemGetDetail,
     itemPost,
     itemDelete,
+    itemPut,
     itemDeleteDetail
 
 } from "../controllers/itemController.js";
