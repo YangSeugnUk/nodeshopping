@@ -18,7 +18,7 @@ const orderPost = asyncHandler( async (req,res) =>{
         taxPrice,
         shippingPrice,
         totalPrice,
-        user
+
     } = req.body
 
     const order = new Order({
@@ -29,7 +29,7 @@ const orderPost = asyncHandler( async (req,res) =>{
         taxPrice,
         shippingPrice,
         totalPrice,
-        user
+        user: req.user._id
     })
 
     const newOrder = await order.save();
